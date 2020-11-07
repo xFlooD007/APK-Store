@@ -1,0 +1,405 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+    background: #f2f5f9;
+    font-family: 'Itim', cursive;
+}
+
+@media(max-width:992px){
+    body{
+        padding-top:0
+    }
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+
+.carousel {
+    width: 100% !important;
+    max-height: 300px !important;
+    height: 300px !important;
+    overflow: hidden !important;
+}
+
+    .carousel img {
+        width: 100% !important;
+        height: 300px !important;
+    }
+
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.nav_menu_site {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 5px;
+}
+
+    .nav_menu_site img{
+        width:40px;
+    }
+       @media(max-width:992px){
+        .nav_menu_site img {
+            width: 100px;
+        }
+        .navbar-inverse {
+            border-color: transparent;
+            background: none;
+        }
+       }
+    @media (max-width: 992px) {
+        .nav_menu_site {
+            position: fixed;
+            right: -350px;
+            padding: 20px 10px;
+            min-height: 100vh;
+            -webkit-transition: .8s;
+            -o-transition: .8s;
+            transition: .8s;
+            z-index: 999;
+            top: 0;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: #343a40;
+            bottom: 0;
+        }
+}
+
+.nav_menu_site.open {
+    right: 0;
+}
+
+.logo_nav_items {
+    display: flex;
+    align-items: center;
+}
+
+@media(max-width:992px){
+    .logo_nav_items {
+        flex-direction:column
+    }
+}
+
+.nav_menu_site ul {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: distribute;
+    list-style: none;
+    padding: 0;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin: 0;
+}
+
+@media (max-width: 992px) {
+    .nav_menu_site ul {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+    }
+}
+
+.nav_menu_site ul li {
+    margin: 0 5px;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+    padding: 7px 15px;
+    text-align:center
+}
+
+@media (max-width: 992px) {
+    .nav_menu_site ul li {
+        margin: 5px;
+    }
+}
+
+.nav_menu_site ul li:hover {
+    background-color: var(--orange-color);
+}
+
+.nav_menu_site ul li a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.menu_icon_nav {
+    display: none;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    background: #343a40;
+    padding: 8px 10px;
+    border-radius: 50%;
+    z-index: 999;
+}
+
+.menu_icon_nav i{
+    font-size:20px;
+    color:#fff;
+}
+
+@media (max-width: 992px) {
+    .menu_icon_nav {
+        display: block;
+    }
+}
+
+
+.search_site {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+@media (max-width: 767px) {
+    .search_site {
+        -webkit-box-orient: vertical;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+        flex-direction: column;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: center;
+    }
+}
+
+.search_site .search {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+}
+
+    .search_site .search input {
+        padding: 7px;
+        border: 2px solid #ffffffe0;
+        outline: none;
+        background: none;
+        margin-right: 5px;
+        border-radius: 8px;
+        color:#fff;
+    }
+
+@media (max-width: 767px) {
+    .search_site .search input {
+        width: 100%;
+    }
+}
+
+.search_site .search button {
+    border-radius: 8px;
+    padding: 5px;
+    background-color: #fff;
+    color: #000;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    -webkit-transition: 0.3s;
+    -o-transition: 0.3s;
+    transition: 0.3s;
+}
+
+.app_category {
+    margin: 15px 0;
+}
+
+    .app_category .category_title {
+        background: #fbfbfb;
+        padding: 7px;
+        border: 1px solid #0000003b;
+    }
+    .app_category .category_title p{
+        margin:0;
+        font-size:20px;
+    }
+    .app_category .cards {
+        display: flex;
+        -webkit-box-pack: center;
+        -ms-flex-pack: center;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        grid-column-gap: 10px;
+        background: #fff;
+        grid-row-gap: 10px;
+        box-shadow: 0 0 18px -15px #000;
+        border: 1px solid #0000003b;
+        padding: 10px;
+    }
+
+
+
+
+@media (max-width: 767px) {
+    .app_category .cards {
+        justify-content: center;
+    }
+}
+
+.app_category .cards .card {
+    width: 225px;
+    text-align: center;
+    padding: 15px 5px;
+    -webkit-transition: 0.6s;
+    -o-transition: 0.6s;
+    transition: 0.6s;
+    justify-content:center;
+    text-align:center;
+}
+
+@media(max-width:600px){
+    .app_category .cards .card{
+        width:95px;
+    }
+}
+
+    .app_category .cards .card i {
+        color: #ff6a00;
+    }
+
+    .app_category .cards .card img {
+        width: 90px;
+        height: 90px;
+        margin-right: 5px;
+    }
+
+
+.app_category .cards .card div {
+    text-align: center;
+    width:100%;
+}
+
+.app_category .cards .card p, .app_category .cards .card a {
+    text-align: center;
+    font-size: 16px;
+    margin:5px 0;
+}
+
+.app_category .cards button {
+    background: #7bbf47;
+    border:none;
+    padding:3px 7px;
+    margin-top:5px;
+    position:absolute;
+    bottom:-60px;
+    transition:0.3s;
+    width:100%;
+    left:0;
+}
+.app_category .cards button a{
+    color:#fff
+}
+
+.card_info {
+    position: relative;
+    overflow:hidden;
+}
+.card_info:hover button{
+    bottom:0px;
+    text-align:center;
+}
+    .card_info:hover button a{
+        text-decoration:none;
+    }
+    .card:hover {
+        background: #eae7e7;
+    }
+
+
+.loginform {
+    width: 50%;
+    height: 100vh;
+    margin: auto;
+    padding: 0 40px;
+}
+
+@media (max-width: 767px) {
+    .loginform {
+        width: 100%;
+    }
+}
+
+.loginform .login {
+    position: relative;
+    top: 30%;
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+}
+
+    .loginform .login .logo {
+        text-align: center;
+    }
+
+        .loginform .login .logo img {
+            width: 150px;
+            height: 150px;
+        }
+
+    .loginform .login .box_form {
+        background-color: #fff;
+        padding: 15px;
+        width: 75%;
+        margin: 10px auto;
+        -webkit-box-shadow: 1px 1px 6px -4px #000;
+        box-shadow: 1px 1px 6px -4px #000;
+    }
+
+@media (max-width: 767px) {
+    .loginform .login .box_form {
+        width: 100%;
+    }
+}
+
+.loginform .login .box_form p {
+    text-align: center;
+}
+
+.loginform .login .box_form div {
+    position: relative;
+}
+
+    .loginform .login .box_form div i {
+        position: absolute;
+        right: 10px;
+        top: 15px;
+    }
+
+.loginform .login input, .loginform .login button {
+    width: 100%;
+    border: 1px solid #00000026;
+    padding: 7px 10px;
+    outline: none;
+    font-size: 13px;
+    margin: 5px 0;
+}
+
+.loginform .login button {
+    margin-top: 8px;
+    border-radius: 0;
+}

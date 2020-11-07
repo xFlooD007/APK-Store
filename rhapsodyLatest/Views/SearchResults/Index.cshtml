@@ -1,0 +1,47 @@
+﻿@model IEnumerable<apk>
+@{
+    ViewBag.Title = "Search";
+}
+
+<div class="app_category">
+    <div class="category_title">
+        <a><p>Search results</p></a>
+    </div>
+
+    
+    <div class="cards">
+        @if (Model != null && Model.Count() > 0)
+        {
+            foreach (var app in Model)
+            {
+
+                <div class="card">
+                    <img src="@Url.Content(app.img)" alt="">
+                    <div class="card_info">
+                        <p class="app_name">@app.name</p>
+
+                        <div>
+                            @for (int x = 0; x < app.rate; x++)
+                            {
+                                <i class="fa fa-star"></i>
+                            }
+
+                        </div>
+
+                        <p>@app.date</p>
+                        <div><button><a href="#">Download</a></button></div>
+                    </div>
+                </div>
+
+            }
+        }
+        else
+        {
+            <p>Your search returned no results</p>
+        }
+    </div>
+    
+
+
+</div>
+

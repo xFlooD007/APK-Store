@@ -1,0 +1,38 @@
+﻿@model rhapsodyLatest.Models.CategoryModel
+@{
+    ViewBag.Title = "Index";
+}
+
+<div class="app_category">
+    <div class="category_title">
+        <a href="/Category?id=@Model.ID"><p>@Model.Name</p></a>
+    </div>
+    <div class="cards">
+
+
+            @foreach (var app in Model.APKs)
+            {
+
+                <div class="card">
+                    <img src="@Url.Content(app.img)" alt="">
+                    <div class="card_info">
+                        <p class="app_name">@app.name</p>
+
+                        <div>
+                            @for (int x = 0; x < app.rate; x++)
+                            {
+                                <i class="fa fa-star"></i>
+                            }
+
+                        </div>
+
+                        <p>@app.date</p>
+                        <div><button><a href="#">Download</a></button></div>
+                    </div>
+                </div>
+
+            }
+
+    </div>
+</div>
+
