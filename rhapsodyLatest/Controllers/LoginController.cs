@@ -15,9 +15,21 @@ namespace rhapsodyLatest.Controllers
     public class LoginController : Controller
     {
         // GET: Login
-        public ActionResult Index()
-        {
+        //public ActionResult Index()
+        //{
 
+        //    var authManager = HttpContext.GetOwinContext().Authentication;
+
+        //    if (authManager.User.Identity.IsAuthenticated)
+        //    {
+        //        return Redirect(Url.Action("Index", "dashboard"));
+        //    }
+
+        //    return View();
+        //}
+
+        public ActionResult Index(string returnUrl)
+        {
             var authManager = HttpContext.GetOwinContext().Authentication;
 
             if (authManager.User.Identity.IsAuthenticated)
@@ -25,7 +37,8 @@ namespace rhapsodyLatest.Controllers
                 return Redirect(Url.Action("Index", "dashboard"));
             }
 
-            return View();
+            var model = new LoginViewModel() { ReturnUrl = returnUrl };
+            return View(model);
         }
 
 
@@ -37,8 +50,9 @@ namespace rhapsodyLatest.Controllers
             {
                 var userManager = HttpContext.GetOwinContext().GetUserManager<AppUserManager>();
                 var authManager = HttpContext.GetOwinContext().Authentication;
-                
+
                 AppUser user = userManager.Find(login.UserName, login.Password);
+
                 if (user != null)
                 {
                     var ident = userManager.CreateIdentity(user,

@@ -1,0 +1,70 @@
+﻿@model rhapsodyLatest.Models.AddApkViewModel
+
+@{
+    ViewBag.Title = "AddApk";
+    Layout = "~/rhapsodylatest/Views/Dashboard/DashboardLayout.cshtml";
+    var cats = (IEnumerable<Category>)ViewBag.Categories;
+    var selectListItems = (SelectList)ViewBag.SelectListItems;
+}
+
+<div class="cont2">
+
+    @using (Html.BeginForm("AddApk", "Dashboard", FormMethod.Post, new
+    {
+        enctype = "multipart/form-data",
+        @class ="account-details-add-p"
+    }))
+    {
+
+        @Html.AntiForgeryToken()
+
+        @*<form class="account-details-add-p">*@
+            <p class="account-title" dir="ltr"><img src="~/rhapsodylatest/icons/Asset 8mdpi.png" alt="">
+    @Html.EditorFor(model => model.APKName, new { placeholder = "APK Name", required = "true" }) @*<input type="text" placeholder="Add apk name here" required>*@</p>
+            <div class="accounts-info-imgs">
+                <div class="accounts-info">
+                    <p>App Description</p>
+                    @Html.TextAreaFor(model => model.Description, new { cols = "30", rows = "10", placeholder = "Add App Description Here...", required = "true" })
+                    @*<textarea dir="ltr" name="" id="" cols="30" rows="10" placeholder="Add App Description Here..." required></textarea>*@
+                </div>
+                <div class="imgs-account">
+                    <label class="big-img" for="upload1"><img src="~/rhapsodylatest/icons/upload.png" alt=""></label>
+                    <input type="file" name="Image" id="upload1">
+                </div>
+            </div>
+            <div class="account-main-details">
+                <div class="acc-det-top">
+                    <p>Version: @Html.EditorFor(model => model.Version, new { required = "true" }) @*<input type="text" value="1.7.2" placeholder="version here" required>*@</p>
+                    <p>Publish date: @Html.EditorFor(model => model.PublishDate, new { required = "true" }) </p>
+                    <p>Developers: @Html.EditorFor(model => model.Developers, new { required = "true" }) @*<input type="text" required>*@</p>
+                    @Html.DropDownListFor(model => model.Category, selectListItems, new { required = "true" })
+                    @*<select name="" id="" required>
+            <option value="" disabled selected>Choose Category</option>
+            @foreach (var category in cats)
+            {
+                <option value="@category.id">@category.category1</option>
+            }
+
+        </select>*@
+                    <p>Offical websites:@Html.EditorFor(model => model.OfficialWebsites, "", new { required = "true" }) @*<input type="text">*@</p>
+                </div>
+                <div class="acc-det-top two">
+                    <input type="file" name="APKFile" required>
+                </div>
+            </div>
+            <button style="width:100%" class="btn btn-primary w-100 mt-3" type="submit">Publish</button>
+        @*</form>*@
+
+    }
+</div>
+
+<script>
+    document.querySelector('#upload1').addEventListener('change', function () {
+        if (this.files && this.files[0]) {
+            var img1 = document.querySelector('.big-img img');
+            img1.src = URL.createObjectURL(this.files[0]);
+            img1.style.width = '100%';
+            img1.style.height = '100%';
+        }
+    });
+</script>

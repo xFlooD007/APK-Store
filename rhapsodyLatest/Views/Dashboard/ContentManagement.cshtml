@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "ContentManagement";
+    Layout = "~/rhapsodylatest/Views/Dashboard/DashboardLayout.cshtml";
+    var apks = (IEnumerable<apk>)ViewBag.AllApk;
+}
+
+<div class="cont2" style="padding:0">
+    <div class="tb" style="border-radius:10px;">
+        <div class="search-account">
+            <div style="width: 100%;">
+                <a href="/Dashboard/AddApk"><button class="btn btn-success">Add New Account</button></a>
+                <input type="text" class="search_app" dir="ltr" placeholder="Search for app">
+            </div>
+        </div>
+        <table class="content-table t-d">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>App Name</th>
+                    <th>Number of downloads</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{int x = 0;}
+                @foreach (var apk in apks)
+                {
+                    <tr class="tr">
+                        <td>@(++x)</td>
+                        <td><a href="/apk?id=@apk.id" class="text-primary">@apk.name</a></td>
+                        <td>@apk.downloads</td>
+                        <td><a href="@Url.Action("EditAPK","Dashboard",new { id = apk.id })"><button class="btn btn-primary">Edit</button></a></td>
+                        <td onclick="removeApp(@apk.id)"><a href="#"><button class="btn btn-danger">Delete</button></a></td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+    <script>
+        function removeApp(id) {
+
+            if (!confirm("Are you sure?"))
+                return;
+
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                    console.log(xmlHttp.responseText);
+                }
+            }
+            xmlHttp.open("GET", '/Dashboard/RemoveAPK?ApkID=' + id, true); // false for synchronous request
+            xmlHttp.send(null);
+        }
+    </script>
+</div>

@@ -1,0 +1,30 @@
+﻿
+@{
+    ViewBag.Title = "Register";
+}
+
+<form class="register" action="">
+    <div class="register_form">
+        <div class="logo"><img src="@Url.Content("~/images/logo.png")" alt=""></div>
+        <div class="box_form">
+            <div>
+                <input type="text" id="username" placeholder="Name" required>
+                <i class="fa fa-user" aria-hidden="true"></i>
+            </div>
+            <div>
+                <input type="email" id="username" placeholder="Email" required>
+                <i class="fas fa-envelope"></i>
+            </div>
+            <div>
+                <input type="password" id="password" placeholder="Password" required>
+                <i class="fa fa-key" aria-hidden="true"></i>
+            </div>
+            <div>
+                <input type="password" id="password" placeholder="Confirm password" required>
+                <i class="fas fa-unlock"></i>
+            </div>
+            <button type="submit" class="btn btn-primary">Register</button>
+        </div>
+    </div>
+</form>
+

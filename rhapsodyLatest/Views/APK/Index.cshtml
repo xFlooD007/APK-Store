@@ -1,6 +1,60 @@
 ﻿
 @{
-    ViewBag.Title = "Index";
+    var apk = (apk)ViewBag.apk;
+    ViewBag.Title = apk.name;
+    var size = (string)ViewBag.fileSize;
 }
 
 
+<div class="download_app">
+    <div class="app_card">
+        <img src="@Url.Content(apk.img)" />
+        <div>
+            <p>@apk.name</p>
+            <p class="down"><span>@apk.downloads</span> downloads</p>
+            <div class="my-rating">
+            </div>
+            <button><a href="@Url.Content("/apk/download?id="+apk.id)">Download APk (<span>@size</span>)</a></button>
+        </div>
+    </div>
+    <div class="app_description">
+        <h1></h1>
+        <p>@apk.description</p>
+    </div>
+    <div class="additional_information">
+        <h1>Additional Information</h1>
+        <div class="additional_information_content">
+            <div><p>Version: <span>@apk.version</span></p></div>
+            <div><p>Date Published: <span>@apk.date</span></p></div>
+            <div><p>File size: <span>@size</span></p></div>
+        </div>
+    </div>
+    <form class="th_form" action="" onsubmit="event.preventDefault()">
+        <div class="al" style="text-align:center;"><p id="alert"></p></div>
+        <input type="text" placeholder="your name" id="n1"><br>
+        <div class="input">
+            <input type="text" id="n2" placeholder="Your Feedbacks Here">
+            <button onclick="m()">Send</button>
+        </div>
+        <div class="messages"></div>
+    </form>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="~/Scripts/RaitingStars.js"></script>
+<script>
+    $(".my-rating").starRating({
+        totalStars: 5,
+        emptyColor: 'lightgray',
+        hoverColor: '#fd4',
+        activeColor: '#fd4',
+        ratedColors: ['#fd4', '#fd4', '#fd4', '#fd4', '#fd4'],
+        initialRating: @apk.rate,
+        strokeWidth: 0,
+        useGradient: false,
+        minRating: 1,
+        callback: function (currentRating, $el) {
+            console.log('rated ' + currentRating);
+            // console.log('DOM element ', $el);
+        }
+    });
+</script>

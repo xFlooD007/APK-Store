@@ -1,6 +1,6 @@
 ﻿@model rhapsodyLatest.Models.CategoryModel
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = Model.Name;
 }
 
 <div class="app_category">
@@ -26,8 +26,8 @@
 
                         </div>
 
-                        <p>@app.date</p>
-                        <div><button><a href="#">Download</a></button></div>
+                        <p class="app_date">@app.date</p>
+                        <div><button><a href="@Url.Content("/apk/download?id="+app.id)">Download</a></button></div>
                     </div>
                 </div>
 

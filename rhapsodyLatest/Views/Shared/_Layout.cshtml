@@ -1,18 +1,24 @@
-﻿<!DOCTYPE html>
+﻿
+@{
+    var user = User.Identity;
+}
+
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
-    <title>@ViewBag.Title - Rhapsody APK</title>
+    <title>@ViewBag.Title - APK Store</title>
+    <link rel="stylesheet" href="~/rhapsodylatest/Content/dashboard.css">
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr");
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse">
         <div class="container">
-            <div class="menu_icon_nav"><i class="fa fa-bars"></i></div>
+            <div class="menu_icon_nav" style="cursor:pointer"><i class="fa fa-bars"></i></div>
             <div class="nav_menu_site">
                 <div class="logo_nav_items">
                     <div class="logo"><a href="@Url.Action("Index", "Home")"><img src="@Url.Content("~/images/logo.png")" alt=""></a></div>
@@ -23,25 +29,54 @@
                     </ul>
                 </div>
 
-               
-                <form action="/SearchResults" method="post" class="search_site">
-                    <div class="search">
-                        <input type="text" id="searchTxt" placeholder="Search here..">
-                        <input type="button" value="Search" onclick="location.href='@Url.Action("Index", "SearchResults")?search=' + document.getElementById('searchTxt').value" />
-                    </div>
-                </form>
+                <div class="search_btns">
+                    <form action="/SearchResults" method="post" class="search_site">
+                        <div class="search">
+                            <input type="text" id="searchTxt" placeholder="Search here..">
+                            <input type="button" value="Search" onclick="location.href='@Url.Action("Index", "SearchResults")?search=' + document.getElementById('searchTxt').value" />
+                        </div>
+                    </form>
+                    @if (!user.IsAuthenticated)
+                    {
+                        <div class="btns">
+                            <a href="/Login"><button class="btn btn-primary">Login</button></a>
+                            <a href="/Register"><button class="btn btn-primary">Register</button></a>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="user_info">
+                            <img class="img" src="~/rhapsodylatest/icons/109826775_1565360223625982_6140403979713903862_o.jpg" alt="">
+                            <div>
+                                <p class="user_name"></p>
+                                <p></p>
+                            </div>
+                            <div class="drop">
+                                <div class="dropdown-content">
+                                    <a>
+                                        <img class="img" src="~/rhapsodylatest/icons/109826775_1565360223625982_6140403979713903862_o.jpg" alt="">
+                                    </a>
+                                    <a href="/Dashboard">@user.Name</a>
+                                    <a href="/Dashboard/Logout">Logout</a>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
             </div>
         </div>
     </div>
-    
 
-    <div class="container body-content">
+
+    <div class="container body-content" style="margin-top: 50px;">
         @RenderBody()
         <hr />
         <footer>
             <p>&copy; @DateTime.Now.Year - Rhapsody APK</p>
         </footer>
     </div>
+    
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
@@ -57,6 +92,16 @@
                 clickable: true,
             },
         });
+        let nav_menu_site = document.querySelector(".nav_menu_site ul");
+        let menu_icon_nav = document.querySelector(".menu_icon_nav");
+        menu_icon_nav.addEventListener("click", () => nav_menu_site.classList.toggle("open"));
+        let x = document.querySelector(".user_name").innerHTML.substr(0, 10);
+        if (document.querySelector(".user_name").innerHTML.length < 8) {
+            document.querySelector(".user_name").innerHTML = `${x}...`
+        }
+        document.querySelector(".img").addEventListener("click", () => {
+            document.querySelector(".drop").classList.toggle("open")
+        })
     </script>
     <script src="~/Scripts/app.js"></script>
 </body>
