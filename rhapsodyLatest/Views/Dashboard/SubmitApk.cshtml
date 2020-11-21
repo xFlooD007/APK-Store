@@ -1,16 +1,15 @@
 ﻿@model rhapsodyLatest.Models.AddApkViewModel
 
 @{
-    ViewBag.Title = "EditAPK";
+    ViewBag.Title = "AddApk";
     Layout = "~/Views/Dashboard/DashboardLayout.cshtml";
     var cats = (IEnumerable<Category>)ViewBag.Categories;
     var selectListItems = (SelectList)ViewBag.SelectListItems;
-    var img = (string)ViewBag.ImagePath;
 }
 
 <div class="cont2">
 
-    @using (Html.BeginForm("EditAPK", "Dashboard", FormMethod.Post, new
+    @using (Html.BeginForm("AddApk", "Dashboard", FormMethod.Post, new
     {
         enctype = "multipart/form-data",
         @class = "account-details-add-p"
@@ -21,7 +20,7 @@
 
         @*<form class="account-details-add-p">*@
         <p class="account-title" dir="ltr">
-            <img src="~/icons/Asset 8mdpi.png" alt="">
+            <img src="~/rhapsodylatest/icons/Asset 8mdpi.png" alt="">
             @Html.EditorFor(model => model.APKName, new { placeholder = "APK Name", required = "true" }) @*<input type="text" placeholder="Add apk name here" required>*@
         </p>
         <div class="accounts-info-imgs">
@@ -31,7 +30,7 @@
                 @*<textarea dir="ltr" name="" id="" cols="30" rows="10" placeholder="Add App Description Here..." required></textarea>*@
             </div>
             <div class="imgs-account">
-                <label class="big-img" for="upload1"><img src="~/@(img)" alt=""></label>
+                <label class="big-img" for="upload1"><img src="~/rhapsodylatest/icons/upload.png" alt=""></label>
                 <input type="file" name="Image" id="upload1">
             </div>
         </div>
@@ -52,7 +51,7 @@
                 <p>Offical websites:@Html.EditorFor(model => model.OfficialWebsites, "", new { required = "true" }) @*<input type="text">*@</p>
             </div>
             <div class="acc-det-top two">
-                <input type="file" name="APKFile">
+                <input type="file" name="APKFile" required>
             </div>
         </div>
         <button style="width:100%" class="btn btn-primary w-100 mt-3" type="submit">Publish</button>
@@ -71,4 +70,3 @@
         }
     });
 </script>
-

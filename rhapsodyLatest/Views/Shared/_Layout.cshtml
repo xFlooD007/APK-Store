@@ -26,6 +26,7 @@
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
                         <li>@Html.ActionLink("About", "About", "Home")</li>
                         <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                        <li>@Html.ActionLink("Submit APK", "SubmitApk", "Dashboard")</li>
                     </ul>
                 </div>
 
@@ -95,10 +96,7 @@
         let nav_menu_site = document.querySelector(".nav_menu_site ul");
         let menu_icon_nav = document.querySelector(".menu_icon_nav");
         menu_icon_nav.addEventListener("click", () => nav_menu_site.classList.toggle("open"));
-        let x = document.querySelector(".user_name").innerHTML.substr(0, 10);
-        if (document.querySelector(".user_name").innerHTML.length < 8) {
-            document.querySelector(".user_name").innerHTML = `${x}...`
-        }
+        
         document.querySelector(".img").addEventListener("click", () => {
             document.querySelector(".drop").classList.toggle("open")
         })

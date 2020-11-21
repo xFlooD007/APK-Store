@@ -35,6 +35,21 @@ namespace rhapsodyLatest.Controllers
             return View();
         }
 
+        [Authorize]
+        public void rate(int id,float stars)
+        {
+            using (EFCodeFirstModel db = new EFCodeFirstModel())
+            {
+                var apk = db.apks.ToList().Find(a => a.id == id);
+                apk.reviews++;
+                apk.totalStars += stars;
+                apk.rate = apk.totalStars / apk.reviews;
+
+                db.SaveChanges();
+            }
+        }
+
+        [Authorize]
         public FileResult Download(int id)
         {
             apk apkFile;

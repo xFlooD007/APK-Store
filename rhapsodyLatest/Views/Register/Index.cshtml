@@ -1,13 +1,47 @@
-﻿
+﻿@model rhapsodyLatest.Models.RegisterViewModel
 @{
     ViewBag.Title = "Register";
+    var errors = (string)ViewBag.Errors;
 }
 
-<form class="register" action="">
+<div class="register" action="">
     <div class="register_form">
         <div class="logo"><img src="@Url.Content("~/images/logo.png")" alt=""></div>
         <div class="box_form">
+            @using (Html.BeginForm("Register", "Register", FormMethod.Post, new { @class = "form-signin" }))
+            {
+                @Html.AntiForgeryToken()
             <div>
+                @if (errors != null && errors.Length > 0)
+                {
+                    <p class="text-danger">@errors</p>
+                }
+            </div>
+                <div>
+                    @Html.EditorFor(m => m.Username, new { htmlAttributes = new { placeholder = "Username", autofocus = "autofocus" } })
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    @Html.ValidationMessageFor(m => m.Username, null, new { @class = "text-danger" })
+                </div>
+                <div>
+                    @Html.EditorFor(m => m.Email, new { htmlAttributes = new { placeholder = "E-mail" } })
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    @Html.ValidationMessageFor(m => m.Email, null, new { @class = "text-danger" })
+                </div>
+                <div>
+                    @Html.EditorFor(m => m.Password, new { htmlAttributes = new { placeholder = "Password" } })
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    @Html.ValidationMessageFor(m => m.Password, null, new { @class = "text-danger" })
+                </div>
+                <div>
+                    @Html.EditorFor(m => m.PasswordConfirmation, new { htmlAttributes = new { placeholder = "Confirm Password" } })
+                    <i class="fa fa-user" aria-hidden="true"></i>
+                    @Html.ValidationMessageFor(m => m.PasswordConfirmation, null, new { @class = "text-danger" })
+                </div>
+
+                <button type="submit" class="btn btn-primary">Register</button>
+                @Html.ValidationSummary(true)
+            }
+            @*<div>
                 <input type="text" id="username" placeholder="Name" required>
                 <i class="fa fa-user" aria-hidden="true"></i>
             </div>
@@ -22,9 +56,9 @@
             <div>
                 <input type="password" id="password" placeholder="Confirm password" required>
                 <i class="fas fa-unlock"></i>
-            </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            </div>*@
+
         </div>
     </div>
-</form>
+</div>
 

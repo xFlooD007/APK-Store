@@ -7,6 +7,7 @@ namespace rhapsodyLatest.Models
 {
     public class AddApkViewModel
     {
+        public int Id { get; set; }
         public string APKName { get; set; }
         public string Description { get; set; }
         public string Version { get; set; }

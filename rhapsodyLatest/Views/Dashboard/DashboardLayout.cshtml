@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet">
     <title>@ViewBag.Title - Rhapsody Dashboard</title>
-    <link rel="stylesheet" href="~/rhapsodylatest/Content/dashboard.css">
+    <link rel="stylesheet" href="~/Content/dashboard.css">
     @Styles.Render("~/Content/css")
 </head>
 <body>
@@ -26,7 +26,7 @@
             <div class="top-bar">
                 <div class="tobar-content-left cont">
                     <div class="user-info">
-                        <img src="~/rhapsodylatest/icons/109826775_1565360223625982_6140403979713903862_o.jpg" alt="">
+                        <img src="~/icons/109826775_1565360223625982_6140403979713903862_o.jpg" alt="">
                         <div>
                             <p class="user-name-p">@User.Identity.Name</p>
                             <span>@User.Role()</span>
@@ -67,6 +67,28 @@
             </ul>
         </div>
     </div>
+
+    <script>
+        function showToast(content,success) { //You can change the default value
+            // Get the snackbar DIV
+            var x = document.getElementById("snackbar");
+
+            //Change the text (not mandatory, but I think you might be willing to do it)
+            if (content.length <= 200)
+                x.innerHTML = content;
+            else
+                x.innerHTML = "Internal Error!";
+            if (success)
+                x.style.background = "green";
+            else 
+                x.style.background = "red";
+            // Add the "show" class to DIV
+            x.className = "show";
+
+            // After 3 seconds, remove the show class from DIV
+            setTimeout(function () { x.className = x.className.replace("show", ""); }, 3000);
+        }
+    </script>
 
     <script src="https://kit.fontawesome.com/a1a75d5546.js" crossorigin="anonymous"></script>
 

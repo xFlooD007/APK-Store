@@ -43,9 +43,6 @@ namespace rhapsodyLatest.Controllers
             return View();
         }
 
-        public void Search(string txt)
-        {
-
-        }
+        
     }
 }

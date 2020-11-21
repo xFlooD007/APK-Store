@@ -178,10 +178,6 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202011071317372_initial.cs" />
-    <Compile Include="Migrations\202011071317372_initial.designer.cs">
-      <DependentUpon>202011071317372_initial.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model1.Context.cs">
       <DependentUpon>Model1.Context.tt</DependentUpon>
@@ -202,6 +198,7 @@
     <Compile Include="Models\APKModel.cs" />
     <Compile Include="Models\CategoryModel.cs" />
     <Compile Include="Models\LoginViewModel.cs" />
+    <Compile Include="Models\RegisterViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -273,6 +270,7 @@
     <Content Include="Views\Dashboard\UploadAPK.cshtml" />
     <Content Include="Views\Register\Index.cshtml" />
     <Content Include="Views\Dashboard\EditAPK.cshtml" />
+    <Content Include="Views\Dashboard\SubmitApk.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Applications\" />
@@ -295,11 +293,6 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Migrations\202011071317372_initial.resx">
-      <DependentUpon>202011071317372_initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <EntityDeploy Include="Model1.edmx">

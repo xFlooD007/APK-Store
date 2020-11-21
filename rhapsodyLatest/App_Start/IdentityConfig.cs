@@ -21,7 +21,7 @@ namespace rhapsodyLatest.App_Start
             app.CreatePerOwinContext<RoleManager<AppRole>>((options, context) =>
                 new RoleManager<AppRole>(
                     new RoleStore<AppRole>(context.Get<EFCodeFirstModel>())));
-
+            
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
                 AuthenticationType = DefaultAuthenticationTypes.ApplicationCookie,

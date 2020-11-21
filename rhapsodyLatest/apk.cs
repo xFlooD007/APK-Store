@@ -27,7 +27,9 @@ namespace rhapsodyLatest
         [StringLength(50)]
         public string website { get; set; }
 
-        public int? rate { get; set; }
+        public float rate { get; set; }
+        public float reviews { get; set; }
+        public float totalStars { get; set; }
 
         public int? downloads { get; set; }
 

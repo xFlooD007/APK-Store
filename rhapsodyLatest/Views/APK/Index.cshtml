@@ -48,13 +48,28 @@
         hoverColor: '#fd4',
         activeColor: '#fd4',
         ratedColors: ['#fd4', '#fd4', '#fd4', '#fd4', '#fd4'],
-        initialRating: @apk.rate,
+        initialRating: @(Math.Round(apk.rate*2, MidpointRounding.AwayFromZero) / 2),
         strokeWidth: 0,
         useGradient: false,
         minRating: 1,
         callback: function (currentRating, $el) {
-            console.log('rated ' + currentRating);
-            // console.log('DOM element ', $el);
-        }
-    });
+            if('@User.Identity.IsAuthenticated' == 'False')
+            {
+                window.location = "/Login?ReturnUrl=" + window.location.pathname + window.location.search + window.location.hash
+            }
+            else
+            {
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.onreadystatechange = function() {
+                    if (xmlHttp.readyState == 4 && xmlHttp.status == 200)
+                    {
+                        console.log(xmlHttp.responseText);
+                    }
+                }
+                xmlHttp.open("GET", '/apk/rate?id=' + @apk.id + '&stars=' + currentRating, true); // false for synchronous request
+                xmlHttp.send(null);
+            }
+            
+            }
+        });
 </script>

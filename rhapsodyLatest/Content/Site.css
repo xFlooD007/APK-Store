@@ -803,3 +803,28 @@ bottom: 0;
     -webkit-filter: drop-shadow( -2px -2px 2px #888 );
     filter: drop-shadow( -2px -2px 2px #888 );
 }
+
+.parent-forms {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    grid-column-gap: 15px;
+    grid-row-gap: 15px;
+    margin-top:20px;
+}
+
+.tb h1{
+    color:#000;
+    text-align:center;
+    margin:5px 0;
+}
+@media(max-width:400px){
+    .tb {
+        overflow: hidden;
+        overflow-x: scroll;
+        margin:10px 0;
+    }
+        .tb table, h1, .search-account {
+            width: 500px;
+        }
+    .parent-forms{display:block}
+}

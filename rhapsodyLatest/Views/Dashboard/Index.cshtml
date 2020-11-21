@@ -1,98 +1,217 @@
 ﻿
 @{
     ViewBag.Title = "Index";
-    Layout = "~/rhapsodylatest/Views/Dashboard/DashboardLayout.cshtml";
+    Layout = "~/Views/Dashboard/DashboardLayout.cshtml";
     var num = (int)ViewBag.NumOfAllApks;
     var users = (IQueryable<rhapsodyLatest.Auth.AppUser>)ViewBag.AllUsers;
+    var categories = (IEnumerable<Category>)ViewBag.categories;
 }
 
 <div class="cont2">
     <div class="accounts-dashboard-details">
         <div class="accounts-length accounts">
-            <p class="title" dir="ltr"><img src="icons/Asset 8mdpi.png" alt=""> The number of APKs displayed in all category</p>
+            <p class="title" dir="ltr"><img src="~/icons/Asset 8mdpi.png" alt=""> The number of APKs displayed in all category</p>
             <p dir="ltr" class="accounts-nums"><span class="googleFont">@num</span>apks</p>
         </div>
     </div>
-    @if (User.Role() == "Owner")
-    {
-        <div class="tb" style="border-radius:10px;">
-            <div class="search-account">
-                <div style="width: 100%;">
-                    <input style="width: 100%;max-width:100%" type="text" class="search_app" dir="ltr" placeholder="Search for app">
+
+    <div class="parent-forms">
+        @if (User.Role() == "Owner")
+        {
+            <div class="tb" style="border-radius:10px;">
+                <h1>Users Info</h1>
+                <div class="search-account">
+                    <div style="width: 100%;">
+                        <input style="width: 100%;max-width:100%" type="text" class="search_app" dir="ltr" placeholder="Search for app">
+                    </div>
                 </div>
-            </div>
-            <table class="content-table t-d">
-                <thead>
-                    <tr>
-                        <th>User Name</th>
-                        <th>Current Role</th>
-                        <th>New Roles</th>
-                        <th>Confirm</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @{int i = 0;}
-                    @foreach (var user in users)
-                    {
-                        <tr class="tr">
-                            <td><a href="#" class="text-primary">@user.UserName</a></td>
-                            <td>@user.Role()</td>
-                            <td>
-                                @*@Html.DropDownList("Roles", new SelectList(new string[] { "Owner", "Admin", "Member" }))*@
-                                <select id="RoleComboBox@(++i)">
-                                    <option value="Owner">Owner</option>
-                                    <option value="Admin">Admin</option>
-                                    <option value="Member">Member</option>
-                                </select>
-                            </td>
-
-                            <td>
-                                <a onclick="changeRole('@user.Id', '@i');"><button class="btn btn-primary">Confirm</button></a>
-                            </td>
+                <table class="content-table t-d">
+                    <thead>
+                        <tr>
+                            <th>User Name</th>
+                            <th>Current Role</th>
+                            <th>New Roles</th>
+                            <th>Confirm</th>
                         </tr>
-                    }
+                    </thead>
+                    <tbody>
+                        @{int i = 0;}
+                        @foreach (var user in users)
+                        {
+                            <tr class="tr">
+                                <td><a href="#" class="text-primary">@user.UserName</a></td>
+                                <td>@user.Role()</td>
+                                <td>
+                                    @*@Html.DropDownList("Roles", new SelectList(new string[] { "Owner", "Admin", "Member" }))*@
+                                    <select id="RoleComboBox@(++i)">
+                                        <option value="Owner">Owner</option>
+                                        <option value="Admin">Admin</option>
+                                        <option value="Member">Member</option>
+                                    </select>
+                                </td>
 
-                </tbody>
-            </table>
-        </div>
-        <div class="tb" style="border-radius:10px;">
+                                <td>
+                                    <a onclick="changeRole('@user.Id', '@i');"><button class="btn btn-primary">Confirm</button></a>
+                                </td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        }
+        @if (User.Role() == "Admin" || User.Role() == "Owner")
+        {
+            <div class="tb" style="border-radius:10px;">
+                <h1>Category Management</h1>
+                <table class="content-table t-d">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Category Name</th>
+                            <th>Confirm</th>
+                            <th>Delete</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @{ int c = 0;}
+                        @foreach (var cat in categories)
+                        {
+                            <tr class="tr">
+                                <td>@(++c)</td>
+                                <td><input id="cat@(c)" value="@cat.category1" /></td>
+                                <td>
+                                    <a><button onclick="changeCatName('@cat.id','@c')" class="btn btn-primary">Confirm</button></a>
+                                </td>
+                                <td><button onclick="removeCat('@cat.id')" class="btn btn-danger">Delete</button></td>
+                            </tr>
+                        }
+                    <tr class="tr">
+                        <td>@(++c)</td>
+                        <td><input id="newCategory" value="" placeholder="Add new Category" /></td>
+                        <td colspan="2">
+                            <a><button onclick="newCategory()" class="btn btn-primary">Confirm</button></a>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        }
+
+
+    </div>
+    @if (User.Role() == "Admin" || User.Role() == "Owner")
+    {
+        <div class="tb" style="border-radius:10px;margin-top:20px">
+            <h1>Pending Approvals</h1>
             <table class="content-table t-d">
                 <thead>
                     <tr>
-                        <th>Category Name</th>
-                        <th>Confirm</th>
-                        <th>Delete</th>
+                        <th>APK Name</th>
+                        <th>publish date</th>
+                        <th>User Name</th>
+                        <th>Approve</th>
+                        <th>Decline</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr class="tr">
-                        <td><input value="Tv" /></td>
+                        <td>Test</td>
+                        <td>6/12/2004</td>
+                        <td>User Name</td>
                         <td>
-                            <a><button class="btn btn-primary">Confirm</button></a>
+                            <a><button class="btn btn-primary">Approve</button></a>
                         </td>
-                        <td><button class="btn btn-danger">Delete</button></td>
+                        <td><button class="btn btn-danger">Decline</button></td>
                     </tr>
                 </tbody>
             </table>
         </div>
-        <script>
-            function changeRole(userID, trID) {
-
-                if (!confirm("Are you sure?"))
-                    return;
-
-                var roleName = document.getElementById('RoleComboBox' + trID).value;
-                var xmlHttp = new XMLHttpRequest();
-                xmlHttp.onreadystatechange = function () {
-                    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-                        console.log(xmlHttp.responseText);
-                    }
-                }
-                xmlHttp.open("GET", '/Dashboard/ChangeRole?UserID=' + userID + '&RoleName=' + roleName, true); // false for synchronous request
-                xmlHttp.send(null);
-            }
-        </script>
     }
 
+    <script>
+        function removeCat(catID) {
+
+            if (!confirm("Are you sure?"))
+                return;
+
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                    showToast(xmlHttp.responseText, true);
+                }
+                else
+                    showToast(xmlHttp.responseText, false);
+            }
+            xmlHttp.open("GET", '/Dashboard/RemoveCategory?id=' + catID, true); // false for synchronous request
+            xmlHttp.send(null);
+        }
+        function newCategory() {
+            if (!confirm("Are you sure?"))
+                return;
+
+            var catName = document.getElementById('newCategory').value;
+
+            if (catName.length == 0) {
+                showToast('Category name cannot be empty', false);
+                return;
+            }
+
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                    showToast(xmlHttp.responseText, true);
+                }
+                else
+                    showToast(xmlHttp.responseText, false);
+            }
+            xmlHttp.open("GET", '/Dashboard/CreateNewCategory?name=' + catName, true); // false for synchronous request
+            xmlHttp.send(null);
+        }
+        function changeCatName(catID, trID) {
+            if (!confirm("Are you sure?"))
+                return;
+
+            var newName = document.getElementById('cat' + trID).value;
+
+            if (newName.length == 0) {
+                showToast('Category name cannot be empty', false);
+                return;
+            }
+
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                    showToast(xmlHttp.responseText, true);
+                }
+                else 
+                    showToast(xmlHttp.responseText, false);
+            }
+            xmlHttp.open("GET", '/Dashboard/EditCategoryName?catID=' + catID + '&newName=' + newName, true); // false for synchronous request
+            xmlHttp.send(null);
+        }
+
+        function changeRole(userID, trID) {
+
+            if (!confirm("Are you sure?"))
+                return;
+
+            var roleName = document.getElementById('RoleComboBox' + trID).value;
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.onreadystatechange = function () {
+                if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+                        showToast(xmlHttp.responseText, true);
+                    }
+                    else
+                        showToast(xmlHttp.responseText, false);
+                }
+            }
+            xmlHttp.open("GET", '/Dashboard/ChangeRole?UserID=' + userID + '&RoleName=' + roleName, true); // false for synchronous request
+            xmlHttp.send(null);
+        }
+    </script>
+
 </div>
+<div id="snackbar">Some text some message..</div>
 
